@@ -273,7 +273,9 @@ extern struct ble_npl_eventq *nimble_port_get_dflt_eventq(void);
 
     /* startup bluetooth host stack*/
     ble_hs_thread_startup();
-    
+    MODLOG_DFLT(INFO, "ble_hs_thread_startup\n");
     return 0;
 }
+
 MSH_CMD_EXPORT_ALIAS(ble_hr, ble_hr, "bluetoooth heartrate senson sample");
+FINSH_FUNCTION_EXPORT(ble_hr, "bluetoooth heartrate senson sample");

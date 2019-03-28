@@ -54,11 +54,10 @@
 #include "app_init.h"
 #include "app_event.h"
 
-extern    uint32_t iddddddle_wakeupTime;
 
 void test_event_task(void *agrm)
 {
-    rt_kprintf("iddddddle_wakeupTime = %d\r\n",iddddddle_wakeupTime);
+    rt_kprintf("hello world \r\n");
     
     APP_EVENT_REMOVE_DELAY(test_event_task);
     APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
@@ -67,7 +66,7 @@ void test_event_task(void *agrm)
 int ble_hr(void);
 int main(void)
 {
-    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
+//    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
     rt_kprintf("hello world \r\n");
     ble_hr();
     return RT_TRUE;

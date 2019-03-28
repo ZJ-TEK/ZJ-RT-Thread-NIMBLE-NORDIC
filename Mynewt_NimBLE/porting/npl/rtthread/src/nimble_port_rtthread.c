@@ -41,6 +41,7 @@ int nimble_port_rtthread_init(void)
      * since it has compatible prototype.
      */
     ll_task_h = rt_thread_create("ll", ble_ll_task, NULL, NIMBLE_THRAED_STACK_SIZE + 256, NIMBLE_THREAD_PRIORITY - 1, 10);
+    RT_ASSERT(ll_task_h != RT_NULL);
     if (ll_task_h != RT_NULL)
         rt_thread_startup(ll_task_h);
 
@@ -54,12 +55,10 @@ void ble_hs_thread_entry(void *parameter)
 
 void ble_hs_thread_startup(void)
 {
-    rt_thread_t tid;
-
-    tid = rt_thread_create("host", ble_hs_thread_entry, NULL, NIMBLE_THRAED_STACK_SIZE, NIMBLE_THREAD_PRIORITY + 1, 10);
-    if (tid != RT_NULL)
-        rt_thread_startup(tid);
-
+    host_task_h = rt_thread_create("host", ble_hs_thread_entry, NULL, NIMBLE_THRAED_STACK_SIZE, NIMBLE_THREAD_PRIORITY + 1, 10);
+    RT_ASSERT(host_task_h != RT_NULL);
+    if (host_task_h != RT_NULL)
+        rt_thread_startup(host_task_h);
 }
 
 INIT_COMPONENT_EXPORT(nimble_port_rtthread_init);

@@ -7,7 +7,7 @@
 // <h>RT-Thread Kernel Basic Configuration
 // <o>Maximal level of thread priority <8-256>
 // <i>Default: 32
-#define RT_THREAD_PRIORITY_MAX 32
+#define RT_THREAD_PRIORITY_MAX 12
 // <o>OS tick per second 
 // <64-10000>
 // <i>Default: 1000 (1ms)
@@ -34,7 +34,7 @@
 #endif 
 // <o>the size of main thread<4-4096:4>
 // <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE 1024
+#define RT_MAIN_THREAD_STACK_SIZE 2048
 
 // <o>the priority of main thread 
 #define RT_MAIN_THREAD_PRIORITY 3
@@ -47,14 +47,14 @@
 // <h>Debug Configuration
 // <e>enable kernel debug configuration
 // <i>Default: enable kernel debug configuration 
-#define RT_DEBUG 1
+#define RT_DEBUG 0
 #if RT_DEBUG == 0
 #undef RT_DEBUG
 #endif
 // </e>
 // <e>enable components initialization debug configuration
 // <i>Default: 0
-#define RT_DEBUG_INIT 1
+#define RT_DEBUG_INIT 0
 #if RT_DEBUG_INIT == 0
 #undef RT_DEBUG_INIT
 #endif
@@ -365,7 +365,7 @@
 // <3=> MODLOG_LEVEL_LOG     
 // <4=> MODLOG_LEVEL_RAW     
 // <5=> MODLOG_LEVEL_CRITICAL
-#define NIMBLE_DEBUG_LEVEL 5
+#define NIMBLE_DEBUG_LEVEL 3
 // </h>
 
 // </e>

@@ -4,7 +4,7 @@
 #include "nrfx_rtc.h"
 #include "nrfx_clock.h"
 
-#define RT_USE_LOW_POWER_IDLE 1
+#define RT_USE_LOW_POWER_IDLE 0
 #define TICK_RATE_HZ  RT_TICK_PER_SECOND
 #define SYSTICK_CLOCK_HZ  ( 32768UL )
 
@@ -67,11 +67,11 @@ void OSTick_Handler( void )
     /* leave interrupt */
     rt_interrupt_leave();
 }
-    uint32_t iddddddle_wakeupTime;
 
 static void _sleep_ongo( uint32_t sleep_tick )
 {
     uint32_t enterTime;
+    uint32_t entry_tick;
     uint32_t wakeupTime;
 
     /* Make sure the SysTick reload value does not overflow the counter. */
@@ -91,11 +91,14 @@ static void _sleep_ongo( uint32_t sleep_tick )
     nrf_rtc_event_clear(NRF_RTC_REG, NRF_RTC_EVENT_COMPARE_0);
     nrf_rtc_int_enable(NRF_RTC_REG, NRF_RTC_INT_COMPARE0_MASK);
 
-//    __DSB();
-
+    __DSB();
+    /* No SD -  we would just block interrupts globally.
+    * BASEPRI cannot be used for that because it would prevent WFE from wake up.
+    */
     do{
-        __WFI();
+        __WFE();
     } while (0 == (NVIC->ISPR[0] | NVIC->ISPR[1]));
+
     nrf_rtc_int_disable(NRF_RTC_REG, NRF_RTC_INT_COMPARE0_MASK);
     nrf_rtc_event_clear(NRF_RTC_REG, NRF_RTC_EVENT_COMPARE_0);
 
@@ -115,8 +118,7 @@ static void _sleep_ongo( uint32_t sleep_tick )
        /* It is important that we clear pending here so that our corrections are latest and in sync with tick_interrupt handler */
        NVIC_ClearPendingIRQ(NRF_RTC_IRQn);
        rt_tick_set(rt_tick_get() + diff);
-//       board_printf("exitTime =%d ,enterTime =%d,diff = %d\r\n",exitTime ,enterTime,  (exitTime - enterTime) & NRF_RTC_MAXTICKS);
-        iddddddle_wakeupTime = (exitTime - enterTime) & NRF_RTC_MAXTICKS;
+       board_printf("exitTime =%d ,enterTime =%d,diff = %d\r\n",exitTime ,enterTime,  (exitTime - enterTime) & NRF_RTC_MAXTICKS);
        if (rt_thread_self() != RT_NULL)
        {
        	  struct rt_thread *thread;
@@ -147,14 +149,14 @@ static void _sleep_ongo( uint32_t sleep_tick )
 
 void rt_hw_system_powersave(void)
 {
+     board_printf("rt_hw_system_powersave\r\n");
 #if RT_USE_LOW_POWER_IDLE
     uint32_t sleep_tick;   
-    iddddddle_wakeupTime = rt_timer_next_timeout_tick() - rt_tick_get();
-    __WFI();
-//    if(sleep_tick > EXPECTED_IDLE_TIME_BEFORE_SLEEP)
-//    {
-//        _sleep_ongo( sleep_tick );
-//    }
+    sleep_tick = rt_timer_next_timeout_tick() - rt_tick_get();
+    if(sleep_tick > EXPECTED_IDLE_TIME_BEFORE_SLEEP)
+    {
+        _sleep_ongo( sleep_tick );
+    }
 #endif
 }
 
@@ -170,9 +172,11 @@ void rt_hw_board_init(void)
 #if NRF_LOG_ENABLED && NRF_LOG_BACKEND_RTT_ENABLED
     Log_init();
 #endif
-
-    rt_thread_idle_sethook(rt_hw_system_powersave);
-
+    
+//#if defined (RT_USING_HOOK)
+//    rt_thread_idle_sethook(rt_hw_system_powersave);
+//#endif
+    
 #ifdef RT_USING_HEAP
     rt_system_heap_init((void*)NRF_HEAP_BEGIN, (void*)CHIP_HEAP_END);
 #endif

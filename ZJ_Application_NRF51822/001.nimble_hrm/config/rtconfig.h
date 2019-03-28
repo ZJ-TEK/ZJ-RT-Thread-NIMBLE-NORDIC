@@ -7,7 +7,7 @@
 // <h>RT-Thread Kernel Basic Configuration
 // <o>Maximal level of thread priority <8-256>
 // <i>Default: 32
-#define RT_THREAD_PRIORITY_MAX 32
+#define RT_THREAD_PRIORITY_MAX 12
 // <o>OS tick per second 
 // <64-10000>
 // <i>Default: 1000 (1ms)

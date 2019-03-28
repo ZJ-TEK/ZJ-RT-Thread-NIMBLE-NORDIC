@@ -14,16 +14,16 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>nRF52840_xxAA</Device>
+          <Device>nRF51422_xxAC</Device>
           <Vendor>Nordic Semiconductor</Vendor>
           <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.17.0</PackID>
           <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x40000) IROM(0x00000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x8000) IROM(0x00000000,0x40000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC4000 -FN2 -FF0nrf52xxx -FS00 -FL0200000 -FF1nrf52xxx_uicr -FS110001000 -FL11000 -FP0($$Device:nRF52840_xxAA$Flash\nrf52xxx.flm) -FP1($$Device:nRF52840_xxAA$Flash\nrf52xxx_uicr.flm))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC4000 -FN1 -FF0nrf51xxx -FS00 -FL0200000 -FP0($$Device:nRF51422_xxAC$Flash\nrf51xxx.flm))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:nRF52840_xxAA$Device\Include\nrf.h</RegisterFile>
+          <RegisterFile>$$Device:nRF51422_xxAC$Device\Include\nrf.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:nRF52840_xxAA$SVD\nrf52840.svd</SFDFile>
+          <SFDFile>$$Device:nRF51422_xxAC$SVD\nrf51.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -110,13 +110,13 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments>  -MPU</SimDllArguments>
-          <SimDlgDll>DCM.DLL</SimDlgDll>
-          <SimDlgDllArguments>-pCM4</SimDlgDllArguments>
+          <SimDllArguments>  </SimDllArguments>
+          <SimDlgDll>DARMCM1.DLL</SimDlgDll>
+          <SimDlgDllArguments>-pCM0</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments> -MPU</TargetDllArguments>
-          <TargetDlgDll>TCM.DLL</TargetDlgDll>
-          <TargetDlgDllArguments>-pCM4</TargetDlgDllArguments>
+          <TargetDllArguments> </TargetDllArguments>
+          <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
+          <TargetDlgDllArguments>-pCM0</TargetDlgDllArguments>
         </DllOption>
         <DebugOption>
           <OPTHX>
@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -174,7 +174,7 @@
             <AdsLsxf>1</AdsLsxf>
             <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
-            <AdsCpuType>"Cortex-M4"</AdsCpuType>
+            <AdsCpuType>"Cortex-M0"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
@@ -183,7 +183,7 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>2</RvdsVP>
+            <RvdsVP>0</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
@@ -245,12 +245,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x8000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x40000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -275,7 +275,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x40000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -300,7 +300,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x8000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--reduce_paths --gnu</MiscControls>
-              <Define>CONFIG_GPIO_AS_PINRESET RT_USING_ARM_LIBC  NIMBLE_CFG_CONTROLLER=1 NRF52840_XXAA RETARGET_ENABLED</Define>
+              <Define>RT_USING_ARM_LIBC  NIMBLE_CFG_CONTROLLER=1 NRF51 RETARGET_ENABLED</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\RT_THREAD\components\CMSIS\Include;..\..\..\NORDIC_HAL\nrfx;..\..\..\NORDIC_HAL\nrfx\drivers;..\..\..\NORDIC_HAL\nrfx\drivers\include;..\..\..\NORDIC_HAL\nrfx\drivers\src\prs;..\..\..\NORDIC_HAL\nrfx\hal;..\..\..\NORDIC_HAL\nrfx\mdk;..\..\..\NORDIC_HAL\nrfx\soc;..\..\..\Mynewt_NimBLE;..\..\..\Mynewt_NimBLE\nimble\include;..\..\..\Mynewt_NimBLE\nimble\host\include;..\..\..\Mynewt_NimBLE\nimble\host\src;..\..\..\Mynewt_NimBLE\nimble\host\services\ans\include;..\..\..\Mynewt_NimBLE\nimble\host\services\bas\include;..\..\..\Mynewt_NimBLE\nimble\host\services\bleuart\include;..\..\..\Mynewt_NimBLE\nimble\host\services\gap\include;..\..\..\Mynewt_NimBLE\nimble\host\services\gatt\include;..\..\..\Mynewt_NimBLE\nimble\host\services\ias\include;..\..\..\Mynewt_NimBLE\nimble\host\services\lls\include;..\..\..\Mynewt_NimBLE\nimble\host\services\tps\include;..\..\..\Mynewt_NimBLE\nimble\host\store\ram\include;..\..\..\Mynewt_NimBLE\nimble\host\util\include;..\..\..\Mynewt_NimBLE\porting\nimble\include;..\..\..\Mynewt_NimBLE\porting\npl\rtthread\include;..\..\..\Mynewt_NimBLE\ext\tinycrypt\include;..\..\..\Mynewt_NimBLE\nimble\transport\ram\include;..\..\..\Mynewt_NimBLE\nimble\controller\include;..\..\..\Mynewt_NimBLE\nimble\drivers\nrf52\include;..\..\..\Mynewt_NimBLE\apps\blehr\src;..\..\..\RT_THREAD\include;..\..\..\RT_THREAD\libcpu\arm\common;..\..\..\RT_THREAD\libcpu\arm\cortex-m4;..\..\..\RT_THREAD\components\dfs\include;..\..\..\RT_THREAD\components\dfs\filesystems\devfs;..\..\..\RT_THREAD\components\drivers\include;..\..\..\RT_THREAD\components\drivers\include;..\..\..\RT_THREAD\components\drivers\include;..\..\..\RT_THREAD\components\finsh;..\..\..\RT_THREAD\components\libc\compilers\armlibc;..\..\..\RT_THREAD\components\libc\compilers\common;..\config;..\applications;..\RT_Thread_Startup;..\nordic_misc;..\applications\app_init;..\applications\app_event</IncludePath>
+              <IncludePath>..\..\..\NORDIC_HAL\nrfx;..\..\..\NORDIC_HAL\nrfx\drivers;..\..\..\NORDIC_HAL\nrfx\drivers\include;..\..\..\NORDIC_HAL\nrfx\drivers\src\prs;..\..\..\NORDIC_HAL\nrfx\hal;..\..\..\NORDIC_HAL\nrfx\mdk;..\..\..\NORDIC_HAL\nrfx\soc;..\..\..\NORDIC_HAL\segger_rtt;..\..\..\Mynewt_NimBLE;..\..\..\Mynewt_NimBLE\nimble\include;..\..\..\Mynewt_NimBLE\nimble\host\include;..\..\..\Mynewt_NimBLE\nimble\host\src;..\..\..\Mynewt_NimBLE\nimble\host\services\ans\include;..\..\..\Mynewt_NimBLE\nimble\host\services\bas\include;..\..\..\Mynewt_NimBLE\nimble\host\services\bleuart\include;..\..\..\Mynewt_NimBLE\nimble\host\services\gap\include;..\..\..\Mynewt_NimBLE\nimble\host\services\gatt\include;..\..\..\Mynewt_NimBLE\nimble\host\services\ias\include;..\..\..\Mynewt_NimBLE\nimble\host\services\lls\include;..\..\..\Mynewt_NimBLE\nimble\host\services\tps\include;..\..\..\Mynewt_NimBLE\nimble\host\store\ram\include;..\..\..\Mynewt_NimBLE\nimble\host\util\include;..\..\..\Mynewt_NimBLE\porting\nimble\include;..\..\..\Mynewt_NimBLE\porting\npl\rtthread\include;..\..\..\Mynewt_NimBLE\ext\tinycrypt\include;..\..\..\Mynewt_NimBLE\nimble\transport\ram\include;..\..\..\Mynewt_NimBLE\nimble\controller\include;..\..\..\Mynewt_NimBLE\nimble\drivers\nrf51\include;..\..\..\Mynewt_NimBLE\apps\blehr\src;..\..\..\RT_THREAD\components\CMSIS\Include;..\..\..\RT_THREAD\include;..\..\..\RT_THREAD\libcpu\arm\common;..\..\..\RT_THREAD\libcpu\arm\cortex-m0;..\..\..\RT_THREAD\components\dfs\include;..\..\..\RT_THREAD\components\dfs\filesystems\devfs;..\..\..\RT_THREAD\components\drivers\include;..\..\..\RT_THREAD\components\finsh;..\..\..\RT_THREAD\components\libc\compilers\armlibc;..\..\..\RT_THREAD\components\libc\compilers\common;..\config;..\applications;..\RT_Thread_Startup;..\nordic_misc;..\applications\app_init;..\applications\app_event</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -890,12 +890,12 @@
             <File>
               <FileName>ble_hw.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Mynewt_NimBLE\nimble\drivers\nrf52\src\ble_hw.c</FilePath>
+              <FilePath>..\..\..\Mynewt_NimBLE\nimble\drivers\nrf51\src\ble_hw.c</FilePath>
             </File>
             <File>
               <FileName>ble_phy.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\Mynewt_NimBLE\nimble\drivers\nrf52\src\ble_phy.c</FilePath>
+              <FilePath>..\..\..\Mynewt_NimBLE\nimble\drivers\nrf51\src\ble_phy.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -995,52 +995,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>nordic_hal</GroupName>
-          <Files>
-            <File>
-              <FileName>arm_startup_nrf52840.s</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\NORDIC_HAL\nrfx\mdk\arm_startup_nrf52840.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_nrf52840.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\NORDIC_HAL\nrfx\mdk\system_nrf52840.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_power.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_power.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_glue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\nordic_misc\nrfx_glue.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>cortex_m4</GroupName>
+          <GroupName>cortex_m0</GroupName>
           <Files>
             <File>
               <FileName>cpuport.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\RT_THREAD\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+              <FilePath>..\..\..\RT_THREAD\libcpu\arm\cortex-m0\cpuport.c</FilePath>
             </File>
             <File>
               <FileName>context_rvds.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\..\..\RT_THREAD\libcpu\arm\cortex-m4\context_rvds.s</FilePath>
+              <FilePath>..\..\..\RT_THREAD\libcpu\arm\cortex-m0\context_rvds.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -1076,6 +1041,41 @@
               <FileName>gmtime_r.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\RT_THREAD\components\libc\compilers\common\gmtime_r.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>nrf_hal</GroupName>
+          <Files>
+            <File>
+              <FileName>arm_startup_nrf51.s</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\NORDIC_HAL\nrfx\mdk\arm_startup_nrf51.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_nrf51.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\NORDIC_HAL\nrfx\mdk\system_nrf51.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_power.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\NORDIC_HAL\nrfx\drivers\src\nrfx_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_glue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\nordic_misc\nrfx_glue.c</FilePath>
             </File>
           </Files>
         </Group>
