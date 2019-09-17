@@ -52,16 +52,16 @@
 #include <rtthread.h>
 #include "board.h"
 #include "app_init.h"
-#include "app_event.h"
+//#include "app_event.h"
 
 
-void test_event_task(void *agrm)
-{
-    rt_kprintf("hello world \r\n");
-    
-    APP_EVENT_REMOVE_DELAY(test_event_task);
-    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
-}
+//void test_event_task(void *agrm)
+//{
+//    rt_kprintf("hello world \r\n");
+//    
+//    APP_EVENT_REMOVE_DELAY(test_event_task);
+//    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
+//}
 
 int ble_hr(void);
 int main(void)
