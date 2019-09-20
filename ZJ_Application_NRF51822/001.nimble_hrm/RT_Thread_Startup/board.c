@@ -4,7 +4,7 @@
 #include "nrfx_rtc.h"
 #include "nrfx_clock.h"
 
-#define RT_USE_LOW_POWER_IDLE 0
+#define RT_USE_LOW_POWER_IDLE 1
 #define TICK_RATE_HZ  RT_TICK_PER_SECOND
 #define SYSTICK_CLOCK_HZ  ( 32768UL )
 
@@ -71,7 +71,6 @@ void OSTick_Handler( void )
 static void _sleep_ongo( uint32_t sleep_tick )
 {
     uint32_t enterTime;
-    uint32_t entry_tick;
     uint32_t wakeupTime;
 
     /* Make sure the SysTick reload value does not overflow the counter. */
@@ -96,8 +95,8 @@ static void _sleep_ongo( uint32_t sleep_tick )
     * BASEPRI cannot be used for that because it would prevent WFE from wake up.
     */
     do{
-        __WFE();
-    } while (0 == (NVIC->ISPR[0] | NVIC->ISPR[1]));
+        __WFI();
+    } while (0 == (NVIC->ISPR[0]));
 
     nrf_rtc_int_disable(NRF_RTC_REG, NRF_RTC_INT_COMPARE0_MASK);
     nrf_rtc_event_clear(NRF_RTC_REG, NRF_RTC_EVENT_COMPARE_0);

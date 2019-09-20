@@ -53,12 +53,12 @@
 #include "board.h"
 #include "app_init.h"
 #include "app_event.h"
-
+#include "nrf_gpio.h"
 
 void test_event_task(void *agrm)
 {
     rt_kprintf("hello world \r\n");
-    
+    nrf_gpio_pin_toggle(21);    
     APP_EVENT_REMOVE_DELAY(test_event_task);
     APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
 }
@@ -66,7 +66,8 @@ void test_event_task(void *agrm)
 int ble_hr(void);
 int main(void)
 {
-//    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
+    APP_EVENT_PUSH_DELAY(test_event_task,NULL,1000);
+    nrf_gpio_cfg_output(21);
     rt_kprintf("hello world \r\n");
     ble_hr();
     return RT_TRUE;
