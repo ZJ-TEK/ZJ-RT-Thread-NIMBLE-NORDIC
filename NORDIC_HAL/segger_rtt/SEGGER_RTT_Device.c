@@ -70,13 +70,21 @@ static void segger_rtt_tx(char const * buffer, size_t len)
     {
         uint32_t idx = 0;
         uint32_t processed;
+        uint32_t watchdog_counter = 10;
         do
         {
-            SEGGER_RTT_SetTerminal(0);
-            SEGGER_RTT_WriteString(0,RTT_CTRL_TEXT_BRIGHT_YELLOW);
-            processed = SEGGER_RTT_WriteNoLock(0, &buffer[idx], len);
+            processed = SEGGER_RTT_WriteNoLock(0, buffer, len);
             idx += processed;
             len -= processed;
+            if (processed == 0)
+            {
+                // If RTT is not connected then ensure that logger does not block
+                watchdog_counter--;
+                if (watchdog_counter == 0)
+                {
+                    break;
+                }
+            }
         } while (len);
     }
 }
